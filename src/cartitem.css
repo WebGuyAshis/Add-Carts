@@ -1,0 +1,46 @@
+.item{
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    height: 110px;
+    width: 400px;
+    justify-content: space-around;
+}
+
+.img{
+    height: 100px;
+    width: 100px;
+    background-color: rgb(168, 168, 168);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.img img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.title{
+    width: 150px;
+}
+
+.add-delete-item{
+    width: 120px;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.add-item{
+    height: 40px;
+    width: 40px;
+}
+.quantity{
+    font-size: 23px;
+}
+.remove-item{
+    height: 40px;
+    width: 40px;
+}
