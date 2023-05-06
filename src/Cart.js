@@ -56,7 +56,6 @@ class Cart extends React.Component {
     }
     handleDeleteQty = (id)=>{
         const {products} = this.state;
-
         const items = products.filter((item)=>item.id !== id);
 
         this.setState({

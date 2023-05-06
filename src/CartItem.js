@@ -2,6 +2,7 @@ import React from 'react';
 import './cartitem.css'
 import Plus from './images/plus.png'
 import Minus from './images/minus-button.png'
+import Delete from './images/trash.png'
 
 class CartItem extends React.Component {
     // constructor() {
@@ -47,7 +48,7 @@ class CartItem extends React.Component {
     render() {
         // const {price, title, qty} = this.state;
         const {price, title, qty} = this.props.product;
-        const {product, onIncreaseQty, onDecreaseQty} = this.props;
+        const {product, onIncreaseQty, onDecreaseQty, onDeleteQty} = this.props;
         return (
             <div className="item">
                 {/* {Item Image} */}
@@ -61,14 +62,14 @@ class CartItem extends React.Component {
                         {title}
                     </h2>
                     <div className="item-price">
-                        <h3>
+                        <span>Rs&nbsp;
                             {/* {this.state.price} */}
                             {price}
-                            </h3>
+                            </span>
                     </div>
                 </div>
 
-                <div className="add-delete-item">
+                <div className="add-remove-item">
                     <img className="add-item" src={Plus} alt="" 
                     // onClick={this.increaseQuantity}
                     onClick={()=>{onIncreaseQty(product)}}
@@ -81,6 +82,10 @@ class CartItem extends React.Component {
                     // onClick={this.decreaseQuantity}
                     onClick={()=>{onDecreaseQty(product)}}
                     />
+                </div>
+
+                <div className="delete">
+                    <img className='delete-item' src={Delete} alt="" onClick={()=>{onDeleteQty(product.id)}} />
                 </div>
             </div>
         );
