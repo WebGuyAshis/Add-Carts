@@ -48,14 +48,14 @@ class App extends React.Component {
     console.log("Decrease the quantity of", product);
     const { products } = this.state;
     const index = products.indexOf(product);
-    if (products[index].qty === 0) {
-      this.handleDeleteQty(product.id);
-      return;
-    }
     products[index].qty -= 1;
     this.setState({
       products: products
     })
+    if (products[index].qty === 0) {
+      this.handleDeleteQty(product.id);
+      return;
+    }
   }
   handleDeleteQty = (id) => {
     const { products } = this.state;
