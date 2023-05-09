@@ -15,6 +15,7 @@ class App extends React.Component {
   componentDidMount() {
     db
       .collection("products")
+      .orderBy('price', 'desc')
       .onSnapshot((snapshot) => {
         console.log(snapshot);
         snapshot.docs.map((doc)=>{
@@ -38,33 +39,70 @@ class App extends React.Component {
     console.log("Increase the Quantity of", product);
     const { products } = this.state;
     const index = products.indexOf(product);
-    products[index].qty += 1;
+    // products[index].qty += 1;
 
-    this.setState({
-      products: products
-    });
+    // this.setState({
+    //   products: products
+    // });
+
+    const docRef = db.collection('products').doc(products[index].id);
+
+    docRef
+      .update({
+        qty:products[index].qty + 1
+      })
+      .then(()=>{
+        console.log("Updated Successfully");
+      })
+      .catch(()=>{
+        console.log("Error updating Quantity");
+      })
   }
 
   handleDecreaseQty = (product) => {
     console.log("Decrease the quantity of", product);
     const { products } = this.state;
     const index = products.indexOf(product);
-    products[index].qty -= 1;
-    this.setState({
-      products: products
-    })
-    if (products[index].qty === 0) {
+    
+    // products[index].qty -= 1;
+    // this.setState({
+    //   products: products
+    // })
+    if (products[index].qty === 1) {
       this.handleDeleteQty(product.id);
       return;
     }
+
+    const docRef = db.collection('products').doc(products[index].id);
+
+    docRef
+      .update({
+        qty: products[index].qty - 1
+      })
+      .then(()=>{
+        console.log("Decreased Quantity Successfully");
+      })
+      .catch((err)=>{
+        console.log("Error Decreasing Quantity");
+      })
   }
   handleDeleteQty = (id) => {
     const { products } = this.state;
-    const items = products.filter((item) => item.id !== id);
+    // const items = products.filter((item) => item.id !== id);
 
-    this.setState({
-      products: items
-    });
+    // this.setState({
+    //   products: items
+    // });
+    const docRef = db.collection('products').doc(id);
+
+    docRef
+      .delete()
+      .then(()=>{
+        console.log("Deleted Successfully");
+      })
+      .catch((err)=>{
+        console.log("Error Deleting", err);
+      })
 
   }
   getTotalQty = () => {
