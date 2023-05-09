@@ -87,6 +87,22 @@ class App extends React.Component {
 
     return total;
   }
+  addProduct = () =>{
+    db
+      .collection('products')
+      .add({
+        img: 'https://images.samsung.com/levant/smartphones/galaxy-s23/buy/kv_group_MO_v2.jpg',
+        title: 'Samsung Galaxy S23 Ultra',
+        qty: 1,
+        price: 61990
+      })
+      .then((docRef)=>{
+        console.log("Product has been added: ", docRef);
+      })
+      .catch((err)=>{
+        console.log("Error Adding Product", err);
+      })
+  }
 
   render() {
     const { products ,loading } = this.state;
@@ -94,6 +110,7 @@ class App extends React.Component {
       <div className="cart">
         <Navbar count={this.getTotalQty()} />
         <h1>Cart</h1>
+        <button onClick={this.addProduct} style={{padding: 5}}>Add Product</button>
         <Cart products={products}
           onIncreaseQty={this.handleIncreaseQty}
           onDecreaseQty={this.handleDecreaseQty}
